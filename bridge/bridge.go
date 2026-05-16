@@ -90,14 +90,24 @@ func (b *Bridge) GetConfigKey(key string) string {
 	return b.Account + "." + key
 }
 
+func (b *Bridge) GetGeneralConfigKey(key string) string {
+	accInfo := strings.Split(bridge.Account, ".")
+	if len(accInfo) != 2 {
+		log.Fatalf("config failure, account incorrect: %s", bridge.Account)
+	}
+
+	protocol := accInfo[0]
+	return "general." + protocol + "." + key
+}
+
 func (b *Bridge) IsKeySet(key string) bool {
-	return b.Config.IsKeySet(b.GetConfigKey(key)) || b.Config.IsKeySet("general."+key)
+	return b.Config.IsKeySet(b.GetConfigKey(key)) || b.Config.IsKeySet(b.GetGeneralConfigKey(key))
 }
 
 func (b *Bridge) GetBool(key string) bool {
 	val, ok := b.Config.GetBool(b.GetConfigKey(key))
 	if !ok {
-		val, _ = b.Config.GetBool("general." + key)
+		val, _ = b.Config.GetBool(b.GetGeneralConfigKey(key))
 	}
 	return val
 }
@@ -105,7 +115,7 @@ func (b *Bridge) GetBool(key string) bool {
 func (b *Bridge) GetInt(key string) int {
 	val, ok := b.Config.GetInt(b.GetConfigKey(key))
 	if !ok {
-		val, _ = b.Config.GetInt("general." + key)
+		val, _ = b.Config.GetInt(b.GetGeneralConfigKey(key))
 	}
 	return val
 }
@@ -113,7 +123,7 @@ func (b *Bridge) GetInt(key string) int {
 func (b *Bridge) GetString(key string) string {
 	val, ok := b.Config.GetString(b.GetConfigKey(key))
 	if !ok {
-		val, _ = b.Config.GetString("general." + key)
+		val, _ = b.Config.GetString(b.GetGeneralConfigKey(key))
 	}
 	return val
 }
@@ -121,7 +131,7 @@ func (b *Bridge) GetString(key string) string {
 func (b *Bridge) GetStringSlice(key string) []string {
 	val, ok := b.Config.GetStringSlice(b.GetConfigKey(key))
 	if !ok {
-		val, _ = b.Config.GetStringSlice("general." + key)
+		val, _ = b.Config.GetStringSlice(b.GetGeneralConfigKey(key))
 	}
 	return val
 }
@@ -129,7 +139,7 @@ func (b *Bridge) GetStringSlice(key string) []string {
 func (b *Bridge) GetStringSlice2D(key string) [][]string {
 	val, ok := b.Config.GetStringSlice2D(b.GetConfigKey(key))
 	if !ok {
-		val, _ = b.Config.GetStringSlice2D("general." + key)
+		val, _ = b.Config.GetStringSlice2D(b.GetGeneralConfigKey(key))
 	}
 	return val
 }
