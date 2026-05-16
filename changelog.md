@@ -1,3 +1,20 @@
+# v1.26.0-compsoc.3
+
+- Support lookup of config keys from protocol-general fields
+- Cherry-pick timschumi's work on supporting Discord server with >1000 members
+- Cherry-pick irydacea's work on supporting CustomStatus on Discord
+
+# v1.26.0-compsoc.2
+
+- Support bridged deletions via webhook across Discord servers
+- Support quote replies on Discord
+
+# v1.26.0-compsoc.1
+
+- Based on nomis' fork to ignore old Discord updates
+- Now pushes Docker images to ghcr.io
+- Update GitHub actions dependencies for CI
+
 # v1.26.0
 
 ## New features
