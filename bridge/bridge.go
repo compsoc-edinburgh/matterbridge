@@ -91,9 +91,9 @@ func (b *Bridge) GetConfigKey(key string) string {
 }
 
 func (b *Bridge) GetGeneralConfigKey(key string) string {
-	accInfo := strings.Split(bridge.Account, ".")
+	accInfo := strings.Split(b.Account, ".")
 	if len(accInfo) != 2 {
-		log.Fatalf("config failure, account incorrect: %s", bridge.Account)
+		log.Fatalf("config failure, account incorrect: %s", b.Account)
 	}
 
 	protocol := accInfo[0]
